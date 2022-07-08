@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  menu_generator:
+    image: local/menu_generator:latest
+

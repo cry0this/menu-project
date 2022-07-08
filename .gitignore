@@ -22,3 +22,6 @@ app/log/*
 
 # test
 test.py
+
+# tmp files
+tmp
