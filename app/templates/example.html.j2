@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#food {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#food td, #food th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#food tr:nth-child(even){background-color: #f2f2f2;}
+
+#food tr:hover {background-color: #ddd;}
+
+#food th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<h1>Меню</h1>
+
+<table id="food">
+  <tr>
+    <th>Блюдо</th>
+    <th>Цена</th>
+  </tr>
+  {% for item in data %}
+  <tr>
+    <td>{{ item['name'] }}</td>
+    <td>{{ item['price'] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>
