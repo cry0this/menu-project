@@ -30,7 +30,6 @@ RUN ln -s /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 
 ADD docker/cron.conf /etc/crontabs/root
 ADD docker/logrotate.conf /etc/logrotate.d/menu-generator
-ADD docker/docker-entrypoint.sh /
 
-ENTRYPOINT [ "/bin/ash" ]
-CMD ["-c", "/usr/sbin/crond -f -l2 -d2"]
+ENTRYPOINT [ "/bin/ash", "-c" ]
+CMD ["/usr/sbin/crond -f -l2 -d2"]

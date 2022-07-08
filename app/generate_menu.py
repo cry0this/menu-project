@@ -58,7 +58,6 @@ def exception_wrapper(fn):
 def parse_args() -> argparse.Namespace:
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
-    day_str = datetime.now().strftime('%Y-%m-%d')
     date_str = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
 
     parser = argparse.ArgumentParser(
@@ -68,13 +67,13 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument(
         '-l', '--log',
-        default=os.path.join(dir_path, 'log', day_str, f'app_{date_str}.log'),
+        default=os.path.join(dir_path, 'log', f'app_{date_str}.log'),
         help='path to app log'
     )
 
     parser.add_argument(
         '-s', '--selenium-log',
-        default=os.path.join(dir_path, 'log', day_str, f'selenium_{date_str}.log'),
+        default=os.path.join(dir_path, 'log', f'selenium_{date_str}.log'),
         help='path to selenium log'
     )
 
@@ -159,7 +158,7 @@ def main():
     template = Template(html_src)
     template_str = template.render(data=data['result'])
 
-    logger.info('Rendered html:\n{}'.format(template_str))
+    logger.debug('Templated html:\n{}'.format(template_str))
 
     tmp_file = tempfile.NamedTemporaryFile(delete=False)
     try:
@@ -175,7 +174,7 @@ def main():
     firefox_options = Options()
     firefox_options.headless = True
 
-    logger.debug("Running headless firefox...")
+    logger.info("Running headless firefox...")
     browser = webdriver.Firefox(
         executable_path='/usr/bin/geckodriver',
         service_log_path=args.selenium_log,
@@ -186,18 +185,18 @@ def main():
     browser.get(f'file://{tmp_file.name}')
     browser.implicitly_wait(5)
 
-    logger.debug("Page rendered")
+    logger.info("Page rendered")
 
     date_str = datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
     image_path = os.path.join(args.images_dir, f'{date_str}.png')
     browser.save_screenshot(image_path)
-    logger.debug(f"Image saved to '{image_path}'")
+    logger.info(f"Image saved to '{image_path}'")
 
     browser.quit()
 
     os.unlink(tmp_file.name)
 
-    logger.debug("DONE")
+    logger.info("DONE")
 
 if __name__ == '__main__':
     main()
