@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 jinja2 = "*"
 selenium = "*"
-pyvirtualdisplay = "*"
 
 [dev-packages]
 

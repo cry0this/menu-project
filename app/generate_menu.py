@@ -95,12 +95,6 @@ def parse_args() -> argparse.Namespace:
         help='path to images directory'
     )
 
-    parser.add_argument(
-        '-v', '--virtual-display',
-        action='store_true',
-        help='run on machine without gpu (need xvfb to be installed)'
-    )
-
     return parser.parse_args()
 
 
@@ -165,11 +159,6 @@ def main():
         tmp_file.write(template_str.encode())
     finally:
         tmp_file.close()
-
-    if args.virtual_display:
-        logger.debug("Started virtual display")
-        display = Display(visible=False, size=(1920, 1080))
-        display.start()
 
     firefox_options = Options()
     firefox_options.headless = True

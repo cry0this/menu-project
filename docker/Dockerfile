@@ -10,7 +10,6 @@ ADD requirements-pipenv.txt Pipfile* /app/
 RUN : \
     && apk add --no-cache \
         firefox \
-        xvfb \
         wget \
         tzdata \
         logrotate \
